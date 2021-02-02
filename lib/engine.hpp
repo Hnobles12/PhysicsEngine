@@ -27,9 +27,22 @@ public:
     float Ixz;
     float Iyz;
 
+    // Body Forces
+
+    // Body Dynamics
+    Vector velocity = Vector(0, 0, 0);
+
     Body(float mass, float I[6], float BBOX[3])
     {
         Body::mass = mass;
+    }
+
+    float linearEOM()
+    {
+    }
+
+    void update(float dt)
+    {
     }
 };
 
