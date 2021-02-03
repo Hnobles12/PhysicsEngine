@@ -1,15 +1,23 @@
 #include <iostream>
 #include "./lib/dynamics.hpp"
+#include "./lib/vectors.hpp"
+
 int main()
 {
-    Vector v1 = Vector(1, 2, 3);
-    Vector v2 = Vector(2, 2, 2);
+    double direction[] = {1.0, 0, 0};
+    math::Vector v1 = math::Vector(4, direction);
 
-    v1 *= v2;
-    double vdir[] = {0, 0, -1};
-    Force f = Force();
-    f.build(100.0, vdir);
-    // f = f * v1;
+    physics::ReferenceFrame I = physics::ReferenceFrame('I');
+    physics::ReferenceFrame A = physics::ReferenceFrame('A');
+    A.angularVelocity(I, v1);
+
+    A.rotation(I).print();
+
+    physics::Vector force = physics::Vector(0.0, 0.0, 0.0);
+    force.referenceFrame(A);
+
     std::cout
-        << f.x << "," << f.y << "," << f.z << std::endl;
+        << force.frame.name << std::endl;
+
+    // std::cout << A.rotation(I).print() << std::endl;
 }
